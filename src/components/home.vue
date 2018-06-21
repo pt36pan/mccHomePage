@@ -53,7 +53,7 @@
         <div class="home-content-info clearfix">
             <div class="info-item">
                 <div v-show="currentLanguage === 'cn'">
-                    <div class="info-item-title">联系我们</div>
+                    <div class="info-item-title">联系我们吧</div>
                     <p>地址：广州市番禺区洛浦街洛溪村北环路自编88号</p>
                     <p>电话：0772-8614285</p>
                     <p>邮箱：mcc@qq.com</p>
