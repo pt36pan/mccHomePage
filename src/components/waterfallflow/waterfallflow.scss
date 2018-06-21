@@ -1,0 +1,178 @@
+$base_color: dodgerblue;
+$font_color: grey;
+$borderOf1px: 1px solid grey;
+
+.waterfall-content {
+  width: 100%;
+  position: relative;
+}
+.clearfix:after{
+  content: ".";
+  clear: both;
+  display: block;
+  overflow: hidden;
+  font-size: 0;
+  height: 0;
+}
+.clearfix{
+  zoom: 1;
+}
+
+@mixin waterfall-content-small() {
+  .waterfall-item {
+    color: $base_color;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .title-small {
+    font-size: 16px;
+  }
+  .title-big {
+    font-size: 20px;
+  }
+
+  .waterfall-item-title-txt{
+    top: 0;
+    transform: none;
+  }
+
+  .waterfall-item-content-button{
+    width: 112px;
+    height: 32px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .waterfall-item-content-img{
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@mixin waterfall-content-middle() {
+  .waterfall-item {
+    display: inline-block;
+    position: absolute;
+    color: $base_color;
+    margin-top: 20px;
+    //float: left;
+    width: 33%;
+  }
+  .title-small {
+    font-size: 16px;
+  }
+  .title-big {
+    font-size: 20px;
+  }
+
+  .waterfall-item-content{
+    float: left;
+    border-left: $borderOf1px;
+  }
+
+  .waterfall-item-content-button{
+    width: 126px;
+    height: 36px;
+    font-size: 18px;
+    margin: 10px 0 0 0;
+  }
+  .waterfall-item-content-img{
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@mixin waterfall-content-large() {
+  .waterfall-item {
+    display: inline-block;
+    position: absolute;
+    color: $base_color;
+    margin-top: 20px;
+    //float: left;
+    width: 33%;
+  }
+  .title-small {
+    font-size: 18px;
+  }
+  .title-big {
+    font-size: 22px;
+  }
+
+  .waterfall-item-content{
+    float: left;
+    border-left: $borderOf1px;
+  }
+
+  .waterfall-item-content-button{
+    width: 140px;
+    height: 40px;
+    font-size: 20px;
+    margin: 10px 0 0 0;
+  }
+
+  .waterfall-item-content-img{
+    width: 80%;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  @include waterfall-content-small()
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  @include waterfall-content-middle();
+}
+
+@media (min-width: 992px) {
+  @include waterfall-content-large();
+}
+
+//内容部分 标题
+.waterfall-item-title {
+  margin-left: 5%;
+  width: 90%;
+  background: white;
+  font-size: 14px;
+  border-left: $borderOf1px;
+}
+
+.waterfall-item-title-txt {
+  position: relative;
+  width: 96%;
+  margin-left: 2%;
+}
+
+//内容部分 主体
+
+.waterfall-item-content {
+  margin-left: 5%;
+  width: 90%;
+  background: white;
+  font-size: 14px;
+  position: relative;
+}
+
+.waterfall-item-content-txt {
+  width: 96%;
+  margin-left: 2%;
+  margin-top: 2%;
+  color: $font_color;
+}
+
+.waterfall-item-content-img{
+  display: block;
+}
+
+.waterfall-item-content-button {
+  border: $base_color 2px solid;
+  border-radius: 4px;
+  color: $base_color;
+  background-color: white;
+  transition: all 1s;
+  cursor: pointer;
+  &:hover {
+    background-color: $base_color;
+    color: white;
+  }
+}

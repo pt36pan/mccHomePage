@@ -1,0 +1,62 @@
+$base_color: dodgerblue;
+
+a {
+  text-decoration: none;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    display: flex;
+  }
+}
+
+/*sidebar start*/
+.sidebar {
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  width: 80px;
+  height: 100%;
+}
+
+.sidebar_item {
+  text-align: center;
+  width: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: $base_color
+}
+
+/*sidebar end*/
+
+.left {
+  left: 0;
+  justify-content: center;
+  .sidebar_item {
+    width: 40px;
+    margin-bottom: 10px;
+    transform: rotate(-90deg);
+  }
+}
+
+.right {
+  right: 48px;
+}
+
+.item_en {
+  position: absolute;
+  left: 12px;
+  min-width: 60px;
+  transform: rotate(90deg);
+}
+

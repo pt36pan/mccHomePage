@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试js</title>
+</head>
+<body>
+<!--<button onclick="f1()">点我</button>-->
+<button style="width: 120px;height: 40px;position: absolute;left: 50%;top: 30%;" onclick="location.reload()">刷新</button>
+
+<script>
+    (function f1() {
+        function Animal() {
+        }
+
+        Animal.prototype.species = '动物';
+        Animal.prototype.birthPlaces = ['北京','上海','香港'];
+
+        //第一种继承 构造函数绑定
+        function Cat(name, color) {
+            Animal.apply(this, arguments);
+            this.name = name;
+            this.color = color;
+        }
+
+        let cat1 = new Cat('大毛', '黄色');
+        console.log('Cat是否已经继承？：' + cat1.species);
+
+        //第二种继承 prototype模式
+        function Dog(name, color) {
+            this.name = name;
+            this.color = color;
+        }
+
+        Dog.prototype = new Animal();
+        Dog.prototype.constructor = Dog;
+        console.log(Dog.prototype.constructor);
+
+        //第三种继承 直接继承prototype
+//        function Mouse(name) {
+//            this.name = name;
+//        }
+//
+//        Mouse.prototype = Animal.prototype;
+//        Mouse.prototype.constructor = Mouse;
+//        console.log(Mouse.prototype);
+//        console.log(Animal.prototype);
+
+        function Bird(name) {
+            this.name = name;
+        }
+        //第四种继承 利用空对象F
+        let F = function () {};
+        F.prototype = Animal.prototype;
+        Bird.prototype = new F();
+        Bird.prototype.constructor = Bird;
+        console.log(Bird.prototype.species);
+
+        //第五种继承 浅拷贝
+        function extend_basic(Child,Parent) {
+            let c = Child.prototype;
+            let p = Parent.prototype;
+            for(let i in p){
+                c[i] = p[i];
+            }
+            c.uber = p;
+        }
+        function Dark() {}
+        extend_basic(Dark,Animal);
+        let d = new Dark();
+        //浅拷贝会出现的问题
+        d.birthPlaces.push('厦门');
+        console.log(d.birthPlaces);
+        console.log(Animal.prototype.birthPlaces);
+
+        //第六种继承 深拷贝 (非构造函数的继承)
+        let Chinese = {
+            nation: '中国'
+        };
+
+        function extend_deep(Parent,Child) {
+            let c = Child || {};
+            for(let i in Parent){
+                if(typeof Parent[i] === 'object'){
+                    c[i] = (Parent[i].constructor === Array) ? [] : {};
+                    extend_deep(Parent[i],c[i]);
+                } else{
+                    c[i] = Parent[i];
+                }
+            }
+            return c
+        }
+
+        Chinese.birthPlaces = ['北京','上海','香港'];
+        let Doctor = extend_deep(Chinese);
+        Doctor.birthPlaces.push('新疆');
+        Chinese.nation = '新中国';
+        console.log(Chinese);
+        console.log(Doctor)
+
+    })();
+</script>
+
+</body>
+</html>
