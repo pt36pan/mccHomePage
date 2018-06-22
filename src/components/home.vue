@@ -93,6 +93,12 @@
         <!--右侧菜单-->
         <side-menu :menuItems="menuItems" @menu-click="handleMenuEvent"></side-menu>
 
+        <!--移动端中英文切换-->
+        <div class="mobile-language-switch">
+            <span :class="getMobileSwitchClass('cn')" @click="handleSideBarEvent({type:0,value:0})">中文</span>
+            <span :class="getMobileSwitchClass('en')" @click="handleSideBarEvent({type:0,value:1})">EN</span>
+        </div>
+
         <!--Loading 加载组件-->
         <loading-mask v-show="isLoading"></loading-mask>
 
@@ -228,6 +234,14 @@
         },
         props: {},
         methods: {
+            //  获取Mobile switch样式
+            getMobileSwitchClass(language){
+                if(this.currentLanguage === language){
+                    return "mobile-language-switch-txt mSwitch-selected"
+                }else{
+                    return "mobile-language-switch-txt"
+                }
+            },
             //  监听sidebar 事件
             handleSideBarEvent(data){
                 let _this = this;
@@ -261,7 +275,7 @@
                 let target_id = data.targetId;
                 switch (target_id) {
                     case 'item-home':
-                        console.log('home');
+                        window.location.href = '/home';
                         break;
                     case 'item-news':
                         console.log('news');
@@ -409,6 +423,10 @@
     .dialog-img {
         width: 50%;
         float: left;
+    }
+
+    .mobile-language-switch{
+        display: none;
     }
 
     /* 屏幕415以上通用样式 */
@@ -571,6 +589,27 @@
         /*dialog */
         .dialog-img {
             width: 100%;
+        }
+
+        .mobile-language-switch{
+            display: block;
+            position: fixed;
+            z-index: 102;
+            right: 0;
+            bottom: 12px;
+            width: 48px;
+            color: lightgray;
+            font-size: 14px;
+
+            & span{
+                display: block;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+        .mSwitch-selected{
+            font-size: 18px;
+            color: white;
         }
     }
 
